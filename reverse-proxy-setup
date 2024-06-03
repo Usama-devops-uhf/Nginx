@@ -1,0 +1,26 @@
+Creating a Reverse Proxy for Nginx , 
+
+sudo unlink /etc/nginx/sites-enabled/default
+Create new reverse proxy configuration, the name is reverse-proxy.conf go to $cd etc/nginx/sites-available then $sudo gedit reverse-proxy.conf for creating new file with name reverse-proxy.conf.
+
+server {
+ listen 80;
+ 
+ access_log /var/log/nginx/reverse-access.log;
+ error_log /var/log/nginx/reverse-error.log;
+location / {
+ proxy_pass http://localhost:8083/;
+ proxy_set_header Host $host;
+ proxy_set_header X-Real-IP $remote_addr;
+ proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+ proxy_set_header X-Forwarded-Proto $scheme;
+ }
+}
+
+ln -s /etc/nginx/sites-available/reverse-proxy.conf /etc/nginx/sites-enabled/reverse-proxy.conf
+
+sudo systemctl reload nginx
+sudo systemctl restart nginx
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
