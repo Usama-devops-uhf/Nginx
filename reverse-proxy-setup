@@ -22,5 +22,6 @@ ln -s /etc/nginx/sites-available/reverse-proxy.conf /etc/nginx/sites-enabled/rev
 sudo systemctl reload nginx
 sudo systemctl restart nginx
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------
+sudo certbot renew --cert-name avengers.pk-0001 --dry-run
 
 
